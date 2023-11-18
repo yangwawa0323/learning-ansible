@@ -1,0 +1,18 @@
+---
+- hosts: webservers
+  user: vagrant
+  become: yes
+
+  vars:
+    tomcat_home : /usr/local/tomcat7
+
+  vars_files:
+    - vars/database.yml
+      
+  tasks:
+    - name: print out tomcat home
+      debug:
+        msg: tomcat home is  {{ tomcat_home }}
+    - name: print out database port
+      debug: 
+        msg: "database port: {{ port }}"
