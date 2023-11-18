@@ -1,0 +1,9 @@
+---
+- hosts: webservers
+  user: vagrant
+  become: yes
+
+  tasks:
+    - name: Copy README to remote
+      debug:
+        msg: "hostname : {{ ansible_hostname }} , gateway: {{ ansible_default_ipv4.gateway }}"
