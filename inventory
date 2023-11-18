@@ -1,0 +1,9 @@
+
+[webservers]
+server01 ansible_user=vagrant
+server02 ansible_user=vagrant
+server03 ansible_user=vagrant
+
+[internal]
+server02
+server03
