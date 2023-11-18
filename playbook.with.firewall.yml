@@ -1,0 +1,30 @@
+---
+- hosts: webservers
+  user: vagrant
+  become: yes
+
+  tasks:
+    - name: Copy README to remote
+      copy:
+        src: ./README.wsl2.txt
+        dest: /tmp/README.txt
+        owner: root
+   
+    - name: yum Install the latest version of Apache
+      ansible.builtin.yum:
+        name: httpd
+        state: latest
+
+    - name: Start service httpd, if not started
+      ansible.builtin.service:
+        name: httpd
+        state: started
+
+    - name: Insert tcp/80 a rule on line 1
+      ansible.builtin.iptables:
+        chain: INPUT
+        protocol: tcp
+        destination_port: 80
+        jump: ACCEPT
+        action: insert
+        rule_num: 1
