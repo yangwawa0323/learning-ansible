@@ -1,0 +1,28 @@
+---
+- hosts: webservers
+  user: vagrant
+  become: yes
+  vars:
+    service_name : tomcat7
+
+  tasks:
+    - name: Copy README to remote
+      copy:
+        src: ./README.wsl2.txt
+        dest: /tmp/README.txt
+        owner: root
+      notify:
+        - "restart {{ service_name }} service"
+   
+    - name: Chown README.txt to vagrant
+      ansible.builtin.file:
+        path: /tmp/README.txt
+        owner: vagrant
+      notify:
+        - "restart {{ service_name }} service"
+
+  handlers:
+    - name: "restart {{ service_name }} service"
+      debug:
+        msg: "restart {{ service_name }} service now..."
+        
