@@ -1,0 +1,20 @@
+---
+- hosts: webservers
+  user: vagrant
+  become: yes
+
+  tasks:
+    - name: Copy README to remote
+      copy:
+        src: ./README.wsl2.txt
+        dest: /tmp/README.txt
+        owner: root
+
+    - name: Pause
+      pause:
+        # prompt: "PLS press 'enter' to continue"
+        seconds: 10
+
+    - name: Debug info
+      debug:
+        msg: "The last task"
