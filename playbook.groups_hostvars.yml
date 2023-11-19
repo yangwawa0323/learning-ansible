@@ -1,0 +1,11 @@
+---
+- hosts: webservers
+  user: vagrant
+  become: yes
+
+  tasks:
+    - name: Print out groups hostvars
+      debug:
+        msg: "{{ hostvars[item].ansible_eth1.ipv4.address }}"
+
+      with_items: "{{ groups['webservers'] }}"
