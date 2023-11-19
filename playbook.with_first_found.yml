@@ -1,0 +1,16 @@
+---
+- hosts: webservers
+  user: vagrant
+  become: yes
+
+  tasks:
+    - name: Copy README to remote
+      copy:
+        src: "{{ item }}"
+        dest: /tmp/apache.cfg
+        owner: root
+     
+      with_first_found:
+        - "files/apache/{{ ansible_os_family }}.cfg"
+        - files/apache/default.cfg
+  
