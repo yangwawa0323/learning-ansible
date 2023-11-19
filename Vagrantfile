@@ -10,8 +10,8 @@ Vagrant.configure("2") do |config|
       node.vm.box = IMAGE_NAMES[rand(IMAGE_NAMES.count)]
 		node.vm.network "public_network" , ip: "192.168.0.10#{i}"
 		node.vm.hostname = "#{VM_NAME}0#{i}"
-		
-		node.vm.network "forwarded_port" , guest: 80, host: "800#{i}"
+		node.ssh.host = "127.0.0.1"
+		# node.vm.network "forwarded_port" , guest: 80, host: "800#{i}"
 		
 		node.vm.provider :virtualbox do |vb|
 		   vb.name = "#{VM_NAME}0#{i}"
