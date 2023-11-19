@@ -1,0 +1,14 @@
+---
+- hosts: webservers
+  user: vagrant
+  become: yes
+
+  vars:
+    total_user: 15
+
+  tasks:
+    - name: With sequence
+      debug:
+        msg: "{{ item }}"
+
+      with_sequence: start=100 end={{ 100 + total_user }} format=user%02d
