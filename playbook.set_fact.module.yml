@@ -1,0 +1,14 @@
+---
+- hosts: webservers
+  user: vagrant
+  become: yes
+
+  tasks:
+    - name: According Host total memory to set innodb buffer size
+      set_fact:
+        innodb_buffer_size : "{{ ansible_memtotal_mb / 2 }} "
+
+    - name: index template      
+      ansible.builtin.template:
+        src: ./templates/index.html.j2
+        dest: /var/www/html/index.html

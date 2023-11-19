@@ -1,0 +1,21 @@
+<html>
+	<body>
+		<h1>Welcome {{ ansible_hostname }}.51cloudclass.com</h1>
+		
+
+		<strong>innodb buffer size</strong> : {{ innodb_buffer_size }}
+			
+		{% if ansible_hostname is eq("server02")  %} 
+			<h2> This host is master!!!</h2>
+		{% else %}
+			<h3> This host is slave...</h3>
+		{% endif %}
+		<br/>
+
+		<ol>
+		{% for ip in ansible_locally_reachable_ips.ipv4  %}
+			<li>{{ ip }}</li>
+		{% endfor %}
+		</ol>
+	</body>
+</html>
