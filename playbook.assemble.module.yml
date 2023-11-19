@@ -1,0 +1,11 @@
+---
+- hosts: webservers
+  user: vagrant
+  become: yes
+
+  tasks:
+    - name: Generate my.cnf from assemble
+      assemble:
+        remote_src: false
+        src: ./conf.d
+        dest: /tmp/my.cnf
