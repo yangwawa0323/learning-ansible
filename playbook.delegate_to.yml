@@ -1,0 +1,13 @@
+---
+- hosts: webservers
+  user: vagrant
+  become: yes
+
+  tasks:
+    - name: Download foo.conf
+      ansible.builtin.get_url:
+        url: "http://{{ ansible_hostname }}"
+        dest: "/tmp/{{ ansible_hostname }}_index.html"
+        force: yes
+
+      delegate_to: localhost
