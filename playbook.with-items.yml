@@ -1,0 +1,16 @@
+---
+- hosts: webservers
+  user: vagrant
+  become: yes
+
+  tasks:
+    - name: Copy README to remote
+      copy:
+        src: ./files/{{ item }}
+        dest: /tmp/{{ item }}
+        owner: root
+
+      with_items:
+        - abc.txt
+        - efg.txt
+        - ken.txt
