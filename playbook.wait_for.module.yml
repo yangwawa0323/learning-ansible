@@ -1,0 +1,18 @@
+---
+- hosts: webservers
+  user: vagrant
+  become: yes
+
+  tasks:
+    - name: start apache
+      ansible.builtin.service:
+        name: httpd
+        state: started
+
+    - name: poll status
+      ansible.builtin.wait_for:
+        port: 80
+
+    - name: Debug message
+      debug:
+        msg: "apache started on port 80"
