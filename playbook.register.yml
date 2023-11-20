@@ -1,0 +1,34 @@
+---
+- hosts: webservers
+  user: vagrant
+  become: yes
+
+  tasks:
+    - name: Copy README to remote
+      copy:
+        src: ./README.wsl2.txt
+        dest: /tmp/README.txt
+        owner: root
+
+      register: result
+
+    - name: print out 
+      debug:
+        msg: "failed : {{ result.failed }}"
+
+
+    - name : get /tmp info
+      file:
+        dest: /tmp
+        state: directory
+      register: tmpInfo
+
+    - name: print out /tmp info
+      debug:
+        msg: "{{ tmpInfo }}"
+
+    - name: create subdirectory under /tmp
+      file:
+        dest: /tmp/level1/level2/level3
+        state: directory
+        mode: "{{ tmpInfo.mode }}"
