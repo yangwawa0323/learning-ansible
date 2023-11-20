@@ -1,0 +1,16 @@
+---
+- hosts: webservers
+  user: vagrant
+  become: yes
+  vars: 
+    x : 99
+
+  tasks:
+    - name: Copy README to remote
+      copy:
+        src: ./README.wsl2.txt
+        dest: /tmp/README.txt
+        owner: root
+
+- name: 
+  ansible.builtin.import_playbook: playbook.with.firewall.yml

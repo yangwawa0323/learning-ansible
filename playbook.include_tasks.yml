@@ -5,11 +5,13 @@
 
   vars:
     version : 0.71
+    x : 100
 
   tasks:
     - name : use include tasks to create multiple users
       include_tasks:
         file: ./tasks/usersetup.yml
+      when: x > 100
       
       vars:
         - user : "{{ item }}"
