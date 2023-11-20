@@ -1,0 +1,20 @@
+---
+- hosts: webservers
+  user: vagrant
+  become: yes
+
+  vars:
+    version : 0.71
+
+  tasks:
+    - name : use include tasks to create multiple users
+      include_tasks:
+        file: ./tasks/usersetup.yml
+      
+      vars:
+        - user : "{{ item }}"
+
+      with_items:
+        - jake
+        - rose
+        - joedoe
