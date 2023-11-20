@@ -1,0 +1,15 @@
+---
+- hosts: webservers
+  user: vagrant
+  become: yes
+
+  tasks:
+    - name: Create users
+      user:
+        name: "{{ item | lower }}"
+        state: present
+
+      with_items:
+        - YangKun
+        - John
+        - DanielH
