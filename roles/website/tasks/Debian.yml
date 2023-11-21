@@ -1,0 +1,9 @@
+- name: replace port port to . in Debian
+  replace:
+    path: /etc/apache2/ports.conf
+    regexp: '^(Listen) (\d+)$'
+    replace: >-
+      \1 {{ port }}
+
+  when: ansible_os_family == 'Debian'
+  notify: 'restart apache2'

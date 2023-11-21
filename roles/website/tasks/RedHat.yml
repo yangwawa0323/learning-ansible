@@ -1,0 +1,12 @@
+- name: replace port port to . in RedHat
+  replace:
+    path: /etc/httpd/conf/httpd.conf
+    regexp: '^(Listen) (\d+)$'
+    # port is variable
+    replace: >-
+      \1 {{ port }}
+
+  when: ansible_os_family == 'RedHat'
+  notify:
+    - 'restart httpd'
+    - 'set iptables'

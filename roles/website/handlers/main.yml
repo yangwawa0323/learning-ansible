@@ -1,0 +1,21 @@
+---
+# handlers file for website
+
+- name: restart apache2
+  service:
+    name: apache2
+    state: restarted
+
+- name: restart httpd
+  service:
+    name: httpd
+    state: restarted
+
+- name: set iptables
+  ansible.builtin.iptables:
+    chain: INPUT
+    protocol: tcp
+    destination_port: '{{ port }}'
+    jump: ACCEPT
+    action: insert
+    rule_num: 1

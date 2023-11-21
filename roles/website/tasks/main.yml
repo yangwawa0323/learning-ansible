@@ -1,0 +1,7 @@
+---
+# tasks file for website
+
+# Debian, RedHat
+- name: include os family tasks
+  include_tasks:
+    file: '{{ ansible_os_family }}.yml'

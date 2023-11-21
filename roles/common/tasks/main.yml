@@ -1,0 +1,7 @@
+---
+# tasks file for common
+- name: Copy file from common rule
+  copy:
+    # relative to ../files
+    src: README.common.txt
+    dest: /tmp/README.common.txt

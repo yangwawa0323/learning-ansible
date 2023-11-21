@@ -1,0 +1,18 @@
+---
+- hosts: webservers
+  user: vagrant
+  become: yes
+
+  roles:
+    - common
+    - role: website
+      vars:
+        - port: 8081
+    - ftpserver
+
+  tasks:
+    - name: Copy README to remote
+      copy:
+        src: ./README.wsl2.txt
+        dest: /tmp/README.txt
+        owner: root
