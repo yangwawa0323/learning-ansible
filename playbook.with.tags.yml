@@ -1,0 +1,34 @@
+---
+- hosts: webservers
+  user: vagrant
+  become: yes
+
+  tasks:
+    - name: Copy README to remote
+      copy:
+        src: ./README.wsl2.txt
+        dest: /tmp/README.txt
+        owner: root
+      tags:
+        - copy
+
+    - name: Debug 01
+      debug:
+        msg: "Debug 01 tags 01 and print"
+      tags:
+        - tag01
+        - print
+
+    - name: Debug 02
+      debug:
+        msg: "Debug 02 tags 02 and print"
+      tags:
+        - tag02
+        - print
+
+    - name: Debug 03
+      debug:
+        msg: "Debug 03 tags 03 and print"
+      tags:
+        - tag03
+        - print

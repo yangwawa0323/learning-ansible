@@ -16,3 +16,5 @@
         src: ./README.wsl2.txt
         dest: /tmp/README.txt
         owner: root
+      tags:
+        - copy

@@ -5,3 +5,5 @@
     # relative to ../files
     src: README.common.txt
     dest: /tmp/README.common.txt
+  tags:
+    - copy
